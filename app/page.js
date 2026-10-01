@@ -1,11 +1,38 @@
 import Image from "next/image";
+import JsonLd from "./components/JsonLd";
 import portraitImage from "../photo.jpeg";
+import { absoluteUrl, site } from "../lib/site";
+
+export const metadata = {
+  alternates: {
+    canonical: "/",
+    types: { "application/rss+xml": "/feed.xml" },
+  },
+};
 
 const Arrow = () => <span aria-hidden="true">↗</span>;
 
 export default function Home() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "@id": `${site.url}/#profile-page`,
+    url: site.url,
+    name: "About Yanqi Wang",
+    description: site.description,
+    inLanguage: site.language,
+    isPartOf: { "@id": `${site.url}/#website` },
+    mainEntity: { "@id": `${site.url}/#person` },
+    primaryImageOfPage: {
+      "@type": "ImageObject",
+      contentUrl: absoluteUrl(portraitImage.src),
+      caption: "Yanqi Wang in Flekke, Norway",
+    },
+  };
+
   return (
       <main>
+        <JsonLd data={jsonLd} />
         <section className="hero shell" aria-labelledby="intro-heading">
           <div className="hero-copy">
             <h1 id="intro-heading">Yanqi Wang</h1>

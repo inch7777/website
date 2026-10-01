@@ -1,7 +1,17 @@
 import Link from "next/link";
 import MusingsLayout, { topics } from "../components/MusingsLayout";
+import JsonLd from "../components/JsonLd";
+import { createPageMetadata } from "../../lib/metadata";
+import { createCollectionJsonLd } from "../../lib/structured-data";
 
-export const metadata = { title: "Musings" };
+const description =
+  "Explore Yanqi Wang's writing on philosophy, politics, and mathematics.";
+
+export const metadata = createPageMetadata({
+  title: "Musings",
+  description,
+  path: "/musings",
+});
 
 const descriptions = {
   Philosophy: "Ideas about meaning, knowledge, and how we choose to live.",
@@ -10,8 +20,16 @@ const descriptions = {
 };
 
 export default function MusingsPage() {
+  const jsonLd = createCollectionJsonLd({
+    name: "Musings",
+    description,
+    path: "/musings",
+    items: topics.map((topic) => ({ name: topic.label, path: topic.href })),
+  });
+
   return (
     <MusingsLayout current="/musings">
+      <JsonLd data={jsonLd} />
       <header className="musings-header">
         <p className="kicker">A collection in progress</p>
         <h1>Musings</h1>

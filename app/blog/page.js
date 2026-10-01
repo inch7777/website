@@ -1,18 +1,32 @@
 import PostList from "../components/PostList";
+import JsonLd from "../components/JsonLd";
 import { getPublishedPosts } from "../../lib/posts";
+import { createPageMetadata } from "../../lib/metadata";
+import { createCollectionJsonLd } from "../../lib/structured-data";
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Blog",
   description:
     "Occasional essays and notes by Yanqi Wang about ideas, school, and life.",
-  alternates: { canonical: "/blog" },
-};
+  path: "/blog",
+});
 
 export default function BlogPage() {
   const posts = getPublishedPosts();
+  const jsonLd = createCollectionJsonLd({
+    name: "Yanqi Wang's Blog",
+    description: metadata.description,
+    path: "/blog",
+    type: "Blog",
+    items: posts.map((post) => ({
+      name: post.title,
+      path: `/blog/${post.slug}`,
+    })),
+  });
 
   return (
     <main className="blog-index shell">
+      <JsonLd data={jsonLd} />
       <header className="blog-index-header">
         <p className="kicker">Notes and essays</p>
         <h1>Blog</h1>

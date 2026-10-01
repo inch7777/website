@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import JsonLd from "../../components/JsonLd";
 import {
   formatPostDate,
   getAdjacentPosts,
@@ -8,6 +9,7 @@ import {
   getTopicLabel,
 } from "../../../lib/posts";
 import { site } from "../../../lib/site";
+import { createPageMetadata } from "../../../lib/metadata";
 
 export const dynamicParams = false;
 
@@ -21,17 +23,22 @@ export async function generateMetadata({ params }) {
 
   if (!post) return {};
 
-  return {
+  const metadata = createPageMetadata({
     title: post.title,
     description: post.description,
-    alternates: { canonical: `/blog/${post.slug}` },
+    path: `/blog/${post.slug}`,
+    type: "article",
+  });
+
+  return {
+    ...metadata,
+    keywords: post.topics.map(getTopicLabel),
     openGraph: {
-      type: "article",
-      title: post.title,
-      description: post.description,
+      ...metadata.openGraph,
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt || post.publishedAt,
-      url: `/blog/${post.slug}`,
+      authors: [site.name],
+      tags: post.topics.map(getTopicLabel),
     },
   };
 }
@@ -51,18 +58,22 @@ export default async function PostPage({ params }) {
     description: post.description,
     datePublished: post.publishedAt,
     dateModified: post.updatedAt || post.publishedAt,
-    author: { "@type": "Person", name: site.name },
-    mainEntityOfPage: `${site.url}/blog/${post.slug}`,
+    url: `${site.url}/blog/${post.slug}`,
+    inLanguage: site.language,
+    author: { "@id": `${site.url}/#person` },
+    publisher: { "@id": `${site.url}/#person` },
+    isPartOf: { "@id": `${site.url}/blog#collection` },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${site.url}/blog/${post.slug}`,
+    },
+    articleSection: post.topics.map(getTopicLabel),
+    keywords: post.topics.map(getTopicLabel).join(", "),
   };
 
   return (
     <main className="article-page shell">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
-        }}
-      />
+      <JsonLd data={jsonLd} />
       <article>
         <header className="article-header">
           <Link className="article-back" href="/blog">
