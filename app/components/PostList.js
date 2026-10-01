@@ -19,7 +19,7 @@ export default function PostList({
     <ol className="post-list">
       {posts.map((post) => (
         <li key={post.slug}>
-          <Link className="post-row" href={`/blog/${post.slug}`}>
+          <Link className="post-row" href={post.href}>
             <time dateTime={post.publishedAt}>
               {formatPostDate(post.publishedAt)}
             </time>
@@ -28,7 +28,11 @@ export default function PostList({
               <span className="post-row-description">{post.description}</span>
             </span>
             <span className="post-row-topic">
-              {getTopicLabel(post.topics[0])}
+              {post.kind === "musing"
+                ? getTopicLabel(post.topic)
+                : post.kind === "literary"
+                  ? "Literary"
+                  : "Blog"}
             </span>
             <span className="post-row-arrow" aria-hidden="true">
               →

@@ -1,6 +1,6 @@
 import PostList from "../components/PostList";
 import JsonLd from "../components/JsonLd";
-import { getPublishedPosts } from "../../lib/posts";
+import { getBlogPosts } from "../../lib/posts";
 import { createPageMetadata } from "../../lib/metadata";
 import { createCollectionJsonLd } from "../../lib/structured-data";
 
@@ -12,7 +12,7 @@ export const metadata = createPageMetadata({
 });
 
 export default function BlogPage() {
-  const posts = getPublishedPosts();
+  const posts = getBlogPosts();
   const jsonLd = createCollectionJsonLd({
     name: "Yanqi Wang's Blog",
     description: metadata.description,
@@ -20,7 +20,7 @@ export default function BlogPage() {
     type: "Blog",
     items: posts.map((post) => ({
       name: post.title,
-      path: `/blog/${post.slug}`,
+      path: post.href,
     })),
   });
 

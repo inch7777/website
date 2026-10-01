@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getPostsByTopic, topics as topicDefinitions } from "../../lib/posts";
 
 const sections = [
   {
@@ -7,11 +8,14 @@ const sections = [
   },
   {
     label: "Topics",
-    items: [
-      { label: "Philosophy", href: "/musings/philosophy" },
-      { label: "Politics", href: "/musings/politics" },
-      { label: "Mathematics", href: "/musings/mathematics" },
-    ],
+    items: topicDefinitions.map((topic) => ({
+      label: topic.label,
+      href: `/musings/${topic.slug}`,
+      children: getPostsByTopic(topic.slug).map((post) => ({
+        label: post.title,
+        href: post.href,
+      })),
+    })),
   },
 ];
 
@@ -39,6 +43,17 @@ export default function MusingsLayout({ current, children }) {
                       <Link href={item.href} aria-current={active ? "page" : undefined}>
                         {item.label}
                       </Link>
+                      {item.children?.length > 0 && (
+                        <ul className="musings-nav-children">
+                          {item.children.map((child) => (
+                            <li key={child.href}>
+                              <Link href={child.href} aria-current={current === child.href ? "page" : undefined}>
+                                {child.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </li>
                   );
                 })}

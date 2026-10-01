@@ -20,7 +20,7 @@ export default function PoliticsPage() {
     name: "Politics",
     description,
     path: "/musings/politics",
-    items: posts.map((post) => ({ name: post.title, path: `/blog/${post.slug}` })),
+    items: posts.map((post) => ({ name: post.title, path: post.href })),
   });
 
   return (

@@ -1,22 +1,25 @@
+import Link from "next/link";
+
 export default function SiteHeader() {
   return (
     <header className="site-header">
       <nav className="nav shell" aria-label="Main navigation">
-        <a className="wordmark" href="/" aria-label="Yanqi Wang, home">
+        <Link className="wordmark" href="/" aria-label="Yanqi Wang, home">
           Yanqi Wang
-        </a>
+        </Link>
         <div className="nav-links">
-          <a href="/">About</a>
+          <Link href="/">About</Link>
           <div className="nav-menu">
-            <a className="nav-menu-label" href="/musings">Musings</a>
+            <Link className="nav-menu-label" href="/musings">Musings</Link>
             <div className="submenu">
-              <a href="/musings/philosophy">Philosophy</a>
-              <a href="/musings/politics">Politics</a>
-              <a href="/musings/mathematics">Mathematics</a>
+              <Link href="/musings/philosophy">Philosophy</Link>
+              <Link href="/musings/politics">Politics</Link>
+              <Link href="/musings/mathematics">Mathematics</Link>
             </div>
           </div>
-          <a href="/media">Media</a>
-          <a href="/blog">Blog</a>
+          <Link href="/literary-works">Literary Works</Link>
+          <Link href="/media">Media</Link>
+          <Link href="/blog">Blog</Link>
         </div>
       </nav>
     </header>

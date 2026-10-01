@@ -1,4 +1,5 @@
 import Image from "next/image";
+import EmailAddress from "./components/EmailAddress";
 import JsonLd from "./components/JsonLd";
 import portraitImage from "../photo.jpeg";
 import { absoluteUrl, site } from "../lib/site";
@@ -52,6 +53,8 @@ export default function Home() {
               <a href="/blog">Blog</a>
               <span aria-hidden="true"> · </span>
               <a href="/musings">Musings</a>
+              <span aria-hidden="true"> · </span>
+              <EmailAddress />
             </p>
           </div>
 

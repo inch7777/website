@@ -19,7 +19,7 @@ export default function PhilosophyPage() {
     name: "Philosophy",
     description,
     path: "/musings/philosophy",
-    items: posts.map((post) => ({ name: post.title, path: `/blog/${post.slug}` })),
+    items: posts.map((post) => ({ name: post.title, path: post.href })),
   });
 
   return (
