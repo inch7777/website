@@ -7,21 +7,17 @@ function decode(values, mask) {
 }
 
 export default function EmailAddressClient({ localPart, domain, mask }) {
-  const [email, setEmail] = useState(null);
+  const [displayAddress, setDisplayAddress] = useState(null);
 
   useEffect(() => {
-    setEmail(`${decode(localPart, mask)}@${decode(domain, mask)}`);
+    setDisplayAddress(
+      `${decode(localPart, mask)} [at] ${decode(domain, mask)}`,
+    );
   }, [domain, localPart, mask]);
 
-  if (!email) {
+  if (!displayAddress) {
     return <span aria-hidden="true">Email</span>;
   }
 
-  const [local, host] = email.split("@");
-
-  return (
-    <a href={`mailto:${email}`} aria-label="Email Yanqi">
-      {local} [at] {host}
-    </a>
-  );
+  return <span>{displayAddress}</span>;
 }
