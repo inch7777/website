@@ -1,15 +1,20 @@
-export const metadata = { title: "Philosophy — Yanqi Wang" };
+import MusingsLayout from "../../components/MusingsLayout";
+import PostList from "../../components/PostList";
+import { getPostsByTopic } from "../../../lib/posts";
+
+export const metadata = { title: "Philosophy" };
 
 export default function PhilosophyPage() {
+  const posts = getPostsByTopic("philosophy");
+
   return (
-    <main className="page shell">
-      <header className="page-header">
+    <MusingsLayout current="/musings/philosophy">
+      <header className="musings-header">
         <p className="kicker">Musings</p>
         <h1>Philosophy</h1>
+        <p className="musings-deck">Notes and questions about ideas, meaning, and how we live.</p>
       </header>
-      <div className="empty-state">
-        <p>Notes and questions about ideas, meaning, and how we live.</p>
-      </div>
-    </main>
+      <PostList posts={posts} />
+    </MusingsLayout>
   );
 }

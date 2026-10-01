@@ -1,15 +1,20 @@
-export const metadata = { title: "Politics — Yanqi Wang" };
+import MusingsLayout from "../../components/MusingsLayout";
+import PostList from "../../components/PostList";
+import { getPostsByTopic } from "../../../lib/posts";
+
+export const metadata = { title: "Politics" };
 
 export default function PoliticsPage() {
+  const posts = getPostsByTopic("politics");
+
   return (
-    <main className="page shell">
-      <header className="page-header">
+    <MusingsLayout current="/musings/politics">
+      <header className="musings-header">
         <p className="kicker">Musings</p>
         <h1>Politics</h1>
+        <p className="musings-deck">Observations on public life, society, and the choices we share.</p>
       </header>
-      <div className="empty-state">
-        <p>Observations on public life, society, and the choices we share.</p>
-      </div>
-    </main>
+      <PostList posts={posts} />
+    </MusingsLayout>
   );
 }

@@ -7,14 +7,14 @@ export default function SiteHeader() {
         </a>
         <div className="nav-links">
           <a href="/">About</a>
-          <details className="nav-menu">
-            <summary>Musings</summary>
+          <div className="nav-menu">
+            <a className="nav-menu-label" href="/musings">Musings</a>
             <div className="submenu">
               <a href="/musings/philosophy">Philosophy</a>
               <a href="/musings/politics">Politics</a>
               <a href="/musings/mathematics">Mathematics</a>
             </div>
-          </details>
+          </div>
           <a href="/media">Media</a>
           <a href="/blog">Blog</a>
         </div>

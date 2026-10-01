@@ -1,4 +1,4 @@
-export const metadata = { title: "Media — Yanqi Wang" };
+export const metadata = { title: "Media" };
 
 export default function MediaPage() {
   return (

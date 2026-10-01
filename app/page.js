@@ -1,3 +1,6 @@
+import Image from "next/image";
+import portraitImage from "../photo.jpeg";
+
 const Arrow = () => <span aria-hidden="true">↗</span>;
 
 export default function Home() {
@@ -19,16 +22,24 @@ export default function Home() {
               and things I find worth keeping.
             </p>
             <p className="hero-links">
-              <a href="/musings/philosophy">Musings</a>
+              <a href="/blog">Blog</a>
               <span aria-hidden="true"> · </span>
-              <a href="/media">Media</a>
+              <a href="/musings">Musings</a>
             </p>
           </div>
 
-          <div className="portrait" role="img" aria-label="Yanqi Wang portrait placeholder">
-            <span className="portrait-mark">YW</span>
-            <span className="portrait-caption">Flekke, Norway</span>
-          </div>
+          <figure className="portrait">
+            <Image
+              className="portrait-image"
+              src={portraitImage}
+              alt="Yanqi Wang outdoors under a blue sky"
+              fill
+              sizes="(max-width: 720px) min(360px, calc(100vw - 36px)), 320px"
+              placeholder="blur"
+              fetchPriority="high"
+            />
+            <figcaption className="portrait-caption">Flekke, Norway</figcaption>
+          </figure>
         </section>
       </main>
   );
