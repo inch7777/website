@@ -1,7 +1,6 @@
 import Link from "next/link";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 import JsonLd from "./JsonLd";
+import MarkdownContent from "./MarkdownContent";
 import { formatPostDate } from "../../lib/posts";
 import { site } from "../../lib/site";
 
@@ -32,7 +31,7 @@ export default function MarkdownArticle({ item, backHref, backLabel }) {
         {item.updatedAt && <p className="article-updated">Updated {formatPostDate(item.updatedAt)}</p>}
       </header>
       <div className="article-body">
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>{item.content}</ReactMarkdown>
+        <MarkdownContent content={item.content} href={item.href} />
       </div>
     </>
   );

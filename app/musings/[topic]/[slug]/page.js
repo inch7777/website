@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 import JsonLd from "../../../components/JsonLd";
+import MarkdownContent from "../../../components/MarkdownContent";
 import MusingsLayout from "../../../components/MusingsLayout";
 import {
   formatPostDate,
@@ -66,7 +65,7 @@ export default async function MusingPage({ params }) {
         <p className="article-deck">{post.description}</p>
       </header>
       <div className="article-body musing-article-body">
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.content}</ReactMarkdown>
+        <MarkdownContent content={post.content} href={post.href} />
       </div>
     </MusingsLayout>
   );

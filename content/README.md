@@ -27,3 +27,11 @@ blocks are supported.
 
 Set `draft: true` while a piece is unfinished. Remove it—or change it to
 `false`—to publish on the next build.
+
+## Supported Markdown
+
+The renderer supports GitHub-flavored Markdown, footnotes, inline and display
+LaTeX (`$...$` and `$$...$$`), syntax-highlighted fenced code, raw HTML, and
+common Obsidian syntax: `==highlights==`, `~={pink}colored highlights=~`,
+`[[wiki links]]`, `![[image.png]]`, `%%comments%%`, and `> [!note]` callouts.
+Put files used by Obsidian image embeds in `public/media/`.

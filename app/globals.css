@@ -799,6 +799,7 @@ h1 {
   padding-top: 48px;
   color: #292929;
   font-family: Georgia, "Times New Roman", serif;
+  font-optical-sizing: auto;
   font-size: 19px;
   line-height: 1.78;
   overflow-wrap: break-word;
@@ -827,6 +828,30 @@ h1 {
 
 .article-body p { text-wrap: pretty; }
 
+.article-body mark {
+  margin-inline: -0.08em;
+  padding-inline: 0.08em;
+  color: inherit;
+  background: #fff0a8;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.article-body mark[data-highlight="pink"] { background: #ffd9e6; }
+
+.article-body mark[data-highlight="red"] { background: #ffc9c9; }
+
+.article-body mark[data-highlight="orange"] { background: #ffe0b2; }
+
+.article-body mark[data-highlight="yellow"] { background: #fff0a8; }
+
+.article-body mark[data-highlight="green"] { background: #d8f3dc; }
+
+.article-body mark[data-highlight="cyan"],
+.article-body mark[data-highlight="blue"] { background: #d7efff; }
+
+.article-body mark[data-highlight="purple"] { background: #eadcff; }
+
 .article-body ul,
 .article-body ol { padding-left: 1.25em; }
 
@@ -842,6 +867,46 @@ h1 {
 }
 
 .article-body blockquote > :last-child { margin-bottom: 0; }
+
+.article-body .callout {
+  --callout-color: #5a6a78;
+  max-width: 680px;
+  margin: 0 0 1.45em;
+  padding: 18px 20px;
+  border: 1px solid color-mix(in srgb, var(--callout-color) 30%, transparent);
+  border-left: 3px solid var(--callout-color);
+  background: color-mix(in srgb, var(--callout-color) 7%, var(--paper));
+}
+
+.article-body .callout[data-callout="note"],
+.article-body .callout[data-callout="info"],
+.article-body .callout[data-callout="todo"] { --callout-color: #3976a8; }
+
+.article-body .callout[data-callout="tip"],
+.article-body .callout[data-callout="success"],
+.article-body .callout[data-callout="check"] { --callout-color: #32805d; }
+
+.article-body .callout[data-callout="warning"],
+.article-body .callout[data-callout="caution"],
+.article-body .callout[data-callout="attention"] { --callout-color: #a66a18; }
+
+.article-body .callout[data-callout="danger"],
+.article-body .callout[data-callout="error"],
+.article-body .callout[data-callout="failure"] { --callout-color: #b14343; }
+
+.article-body .callout[data-callout="question"],
+.article-body .callout[data-callout="example"],
+.article-body .callout[data-callout="quote"] { --callout-color: #7653a6; }
+
+.article-body .callout-title {
+  margin-bottom: 0.35em;
+  color: var(--callout-color);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.78em;
+  letter-spacing: 0.02em;
+}
+
+.article-body .callout > :last-child { margin-bottom: 0; }
 
 .article-body img {
   width: 100%;
@@ -859,8 +924,45 @@ h1 {
 .article-body table {
   display: block;
   max-width: 100%;
+  margin-bottom: 1.45em;
+  border-spacing: 0;
   overflow-x: auto;
 }
+
+.article-body th,
+.article-body td {
+  padding: 0.5em 0.75em;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+
+.article-body th {
+  color: var(--ink);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.78em;
+}
+
+.article-body .contains-task-list {
+  padding-left: 0;
+  list-style: none;
+}
+
+.article-body .task-list-item input {
+  width: 1em;
+  height: 1em;
+  margin: 0 0.5em 0 0;
+  accent-color: var(--ink);
+}
+
+.article-body .katex-display {
+  max-width: 100%;
+  margin: 1.4em 0;
+  padding-block: 0.15em;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.article-body .katex-display > .katex { text-align: left; }
 
 .article-body code {
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
@@ -879,6 +981,40 @@ h1 {
   background: #eeeeeb;
   font-size: 14px;
   line-height: 1.6;
+}
+
+.article-body pre code.hljs {
+  display: block;
+  padding: 0;
+  color: #2f3337;
+  background: transparent;
+}
+
+.article-body .hljs-comment,
+.article-body .hljs-quote { color: #70777e; }
+
+.article-body .hljs-keyword,
+.article-body .hljs-selector-tag,
+.article-body .hljs-literal { color: #8b3d70; }
+
+.article-body .hljs-string,
+.article-body .hljs-title,
+.article-body .hljs-section { color: #39724f; }
+
+.article-body .hljs-number,
+.article-body .hljs-variable,
+.article-body .hljs-template-variable { color: #9a541f; }
+
+.article-body .hljs-built_in,
+.article-body .hljs-type,
+.article-body .hljs-function { color: #315f91; }
+
+.article-body .footnotes {
+  margin-top: 3.5em;
+  padding-top: 1.25em;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.86em;
 }
 
 .article-navigation {
