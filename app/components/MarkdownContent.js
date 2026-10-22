@@ -5,6 +5,7 @@ import rehypeHighlight from "rehype-highlight";
 import rehypeKatex from "rehype-katex";
 import rehypeRaw from "rehype-raw";
 import rehypeSanitize from "rehype-sanitize";
+import rehypeSlug from "rehype-slug";
 import {
   markdownSanitizeSchema,
   preprocessObsidianMarkdown,
@@ -20,6 +21,7 @@ export default function MarkdownContent({ content, href }) {
         [rehypeSanitize, markdownSanitizeSchema],
         [rehypeKatex, { strict: false, throwOnError: false }],
         [rehypeHighlight, { detect: false }],
+        rehypeSlug,
       ]}
     >
       {preprocessObsidianMarkdown(content, href)}

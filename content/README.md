@@ -34,4 +34,5 @@ The renderer supports GitHub-flavored Markdown, footnotes, inline and display
 LaTeX (`$...$` and `$$...$$`), syntax-highlighted fenced code, raw HTML, and
 common Obsidian syntax: `==highlights==`, `~={pink}colored highlights=~`,
 `[[wiki links]]`, `![[image.png]]`, `%%comments%%`, and `> [!note]` callouts.
-Put files used by Obsidian image embeds in `public/media/`.
+Heading links such as `[[Another note#A section]]` are supported. Put files used
+by Obsidian image embeds in `public/media/`.
