@@ -1,6 +1,14 @@
 import Link from "next/link";
 import { getPostsByTopic, topics as topicDefinitions } from "../../lib/posts";
 
+function musingNavigationItem(post) {
+  return {
+    label: post.title,
+    href: post.href,
+    children: post.children.map(musingNavigationItem),
+  };
+}
+
 const sections = [
   {
     label: "Writing",
@@ -11,15 +19,32 @@ const sections = [
     items: topicDefinitions.map((topic) => ({
       label: topic.label,
       href: `/musings/${topic.slug}`,
-      children: getPostsByTopic(topic.slug).map((post) => ({
-        label: post.title,
-        href: post.href,
-      })),
+      children: getPostsByTopic(topic.slug).map(musingNavigationItem),
     })),
   },
 ];
 
 export const topics = sections[1].items;
+
+function NavigationItems({ items, current, nested = false }) {
+  return (
+    <ul className={nested ? "musings-nav-children" : undefined}>
+      {items.map((item) => {
+        const active = current === item.href;
+        return (
+          <li key={item.href}>
+            <Link href={item.href} aria-current={active ? "page" : undefined}>
+              {item.label}
+            </Link>
+            {item.children?.length > 0 && (
+              <NavigationItems items={item.children} current={current} nested />
+            )}
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
 
 export default function MusingsLayout({ current, children }) {
   return (
@@ -35,29 +60,7 @@ export default function MusingsLayout({ current, children }) {
           {sections.map((section) => (
             <section className="musings-nav-section" key={section.label}>
               <h2>{section.label}</h2>
-              <ul>
-                {section.items.map((item) => {
-                  const active = current === item.href;
-                  return (
-                    <li key={item.href}>
-                      <Link href={item.href} aria-current={active ? "page" : undefined}>
-                        {item.label}
-                      </Link>
-                      {item.children?.length > 0 && (
-                        <ul className="musings-nav-children">
-                          {item.children.map((child) => (
-                            <li key={child.href}>
-                              <Link href={child.href} aria-current={current === child.href ? "page" : undefined}>
-                                {child.label}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </li>
-                  );
-                })}
-              </ul>
+              <NavigationItems items={section.items} current={current} />
             </section>
           ))}
         </nav>

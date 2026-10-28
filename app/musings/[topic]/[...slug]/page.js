@@ -16,12 +16,15 @@ import { site } from "../../../../lib/site";
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return getMusings().map((post) => ({ topic: post.topic, slug: post.slug }));
+  return getMusings().map((post) => ({
+    topic: post.topic,
+    slug: post.slug.split("/"),
+  }));
 }
 
 export async function generateMetadata({ params }) {
   const { topic, slug } = await params;
-  const post = getPost(slug, topic);
+  const post = getPost(slug.join("/"), topic);
   if (!post) return {};
 
   return createPageMetadata({
@@ -36,7 +39,7 @@ export default async function MusingPage({ params }) {
   const { topic, slug } = await params;
   if (!topics.some((entry) => entry.slug === topic)) notFound();
 
-  const post = getPost(slug, topic);
+  const post = getPost(slug.join("/"), topic);
   if (!post) notFound();
 
   const jsonLd = {
@@ -55,8 +58,12 @@ export default async function MusingPage({ params }) {
     <MusingsLayout current={post.href}>
       <JsonLd data={jsonLd} />
       <header className="musing-article-header">
-        <Link className="article-back" href={`/musings/${post.topic}`}>
-          <span aria-hidden="true">←</span> {getTopicLabel(post.topic)}
+        <Link
+          className="article-back"
+          href={post.parentHref || `/musings/${post.topic}`}
+        >
+          <span aria-hidden="true">←</span>{" "}
+          {post.parentTitle || getTopicLabel(post.topic)}
         </Link>
         <p className="article-meta">
           <time dateTime={post.publishedAt}>{formatPostDate(post.publishedAt)}</time>

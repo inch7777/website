@@ -6,6 +6,12 @@ Every piece of writing is a Markdown file. Put files in:
 - `literary/` for poetry, fiction, and other literary work
 - `musings/philosophy/`, `musings/politics/`, or `musings/mathematics/` for musings
 
+To add subfiles to a musing, create a folder beside it with the same name
+(without `.md`) and put the subfiles in that folder. For example,
+`mathematics/calculus.md` is the parent of `mathematics/calculus/limits.md`,
+which is published at `/musings/mathematics/calculus/limits`. The same
+convention can be repeated inside subfolders for deeper nesting.
+
 The filename is the URL slug. Use lowercase words separated by hyphens.
 Frontmatter is optional: without it, the first H1 becomes the title and the
 date the file was added to Git becomes the publication date. A filename-based
