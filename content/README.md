@@ -13,6 +13,10 @@ which is published at `/musings/mathematics/calculus/limits`. The same
 convention can be repeated inside subfolders for deeper nesting.
 
 The filename is the URL slug. Use lowercase words separated by hyphens.
+A filename with spaces or other punctuation is still published: those
+characters become hyphens, so `Is Blue Cold.md` is available at
+`/blog/is-blue-cold`. The visible title stays the filename, unless the file
+has a title or an H1.
 Frontmatter is optional: without it, the first H1 becomes the title and the
 date the file was added to Git becomes the publication date. A filename-based
 title and the file creation date are used for new files that are not yet in Git.
