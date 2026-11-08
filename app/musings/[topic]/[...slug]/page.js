@@ -3,8 +3,10 @@ import { notFound } from "next/navigation";
 import JsonLd from "../../../components/JsonLd";
 import MarkdownContent from "../../../components/MarkdownContent";
 import MusingsLayout from "../../../components/MusingsLayout";
+import PostList from "../../../components/PostList";
 import {
   formatPostDate,
+  getChildPosts,
   getPost,
   getMusings,
   getTopicLabel,
@@ -41,6 +43,7 @@ export default async function MusingPage({ params }) {
 
   const post = getPost(slug.join("/"), topic);
   if (!post) notFound();
+  const children = getChildPosts(post);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -69,11 +72,19 @@ export default async function MusingPage({ params }) {
           <time dateTime={post.publishedAt}>{formatPostDate(post.publishedAt)}</time>
         </p>
         <h1>{post.title}</h1>
-        <p className="article-deck">{post.description}</p>
+        {post.description ? <p className="article-deck">{post.description}</p> : null}
       </header>
-      <div className="article-body musing-article-body">
-        <MarkdownContent content={post.content} href={post.href} />
-      </div>
+      {post.content.trim() ? (
+        <div className="article-body musing-article-body">
+          <MarkdownContent content={post.content} href={post.href} />
+        </div>
+      ) : null}
+      {children.length > 0 && (
+        <section className="blog-archive" aria-labelledby="contents-heading">
+          <h2 id="contents-heading">Contents</h2>
+          <PostList posts={children} />
+        </section>
+      )}
     </MusingsLayout>
   );
 }

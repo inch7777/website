@@ -27,12 +27,14 @@ export default function MarkdownArticle({ item, backHref, backLabel }) {
           <time dateTime={item.publishedAt}>{formatPostDate(item.publishedAt)}</time>
         </p>
         <h1>{item.title}</h1>
-        <p className="article-deck">{item.description}</p>
+        {item.description ? <p className="article-deck">{item.description}</p> : null}
         {item.updatedAt && <p className="article-updated">Updated {formatPostDate(item.updatedAt)}</p>}
       </header>
-      <div className="article-body">
-        <MarkdownContent content={item.content} href={item.href} />
-      </div>
+      {item.content.trim() ? (
+        <div className="article-body">
+          <MarkdownContent content={item.content} href={item.href} />
+        </div>
+      ) : null}
     </>
   );
 }

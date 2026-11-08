@@ -8,7 +8,7 @@ const description = "A collection of poetry, fiction, and other literary works b
 export const metadata = createPageMetadata({ title: "Literary Works", description, path: "/literary-works" });
 
 export default function LiteraryWorksPage() {
-  const works = getLiteraryWorks();
+  const works = getLiteraryWorks().filter((work) => !work.parentSlug);
   return (
     <main className="blog-index shell">
       <JsonLd data={createCollectionJsonLd({ name: "Literary Works", description, path: "/literary-works", items: works.map((work) => ({ name: work.title, path: work.href })) })} />

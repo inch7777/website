@@ -6,11 +6,17 @@ Every piece of writing is a Markdown file. Put files in:
 - `literary/` for poetry, fiction, and other literary work
 - `musings/philosophy/`, `musings/politics/`, or `musings/mathematics/` for musings
 
-To add subfiles to a musing, create a folder beside it with the same name
-(without `.md`) and put the subfiles in that folder. For example,
-`mathematics/calculus.md` is the parent of `mathematics/calculus/limits.md`,
-which is published at `/musings/mathematics/calculus/limits`. The same
-convention can be repeated inside subfolders for deeper nesting.
+A folder of Markdown files is published as one piece. This includes folder
+names with spaces. The folder name is the title, and spaces become hyphens
+in the URL, so `literary/A Child and Her Son/Chapter 1.md` is published at
+`/literary-works/a-child-and-her-son/chapter-1`. The same applies under
+`musings/`: `mathematics/self-made IBL on Abstract Algebra/Script1.md` is
+published at `/musings/mathematics/self-made-ibl-on-abstract-algebra/Script1`.
+
+To give that piece an introduction, add a Markdown file beside the folder
+with the same name. `mathematics/calculus.md` is the parent of
+`mathematics/calculus/limits.md`, published at
+`/musings/mathematics/calculus/limits`. Deeper folders work the same way.
 
 The filename is the URL slug. Use lowercase words separated by hyphens.
 A filename with spaces or other punctuation is still published: those
