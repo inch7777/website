@@ -116,27 +116,6 @@ and these $n$ elements are distinct.
 
 **Exercise 2.41.** Let $G$ be a cyclic group of order $n$. How many elements of order $d$ does $G$ have for each $d \mid n$? Express your answer in terms of $\varphi$.
 
----
-
-## The Fundamental Theorem of Cyclic Groups
-
-**Theorem 2.42 (Fundamental Theorem of Cyclic Groups).** Every subgroup of a cyclic group is cyclic. Moreover, if $G = \langle a \rangle$ has order $n$, then:
-
-(a) For every divisor $d$ of $n$, there is a unique subgroup of $G$ of order $d$.
-
-(b) For every divisor $d$ of $n$, the subgroup of order $d$ is $\langle a^{n/d} \rangle$.
-
-**Corollary 2.43.** If $G$ is finite cyclic of order $n$, then for every $d \mid n$, there exists an element of order $d$.
-
-**Corollary 2.44.** If $G$ is finite cyclic, then the number of elements of order $d$ (where $d \mid |G|$) is $\varphi(d)$.
-
-**Exercise 2.45.** How many elements of order $6$ are there in $\mathbb{Z}_{36}$?
-
-**Exercise 2.46.** How many elements of order $4$ are there in $\mathbb{Z}_{20}$?
-
-~={orange}**Exercise 2.47.** Prove that if $G$ is a finite group and $G$ has exactly one subgroup of each order dividing $|G|$, then $G$ is cyclic.=~
-
----
 
 ## Summary
 
