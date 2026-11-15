@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import MarkdownArticle from "../../components/MarkdownArticle";
 import PostList from "../../components/PostList";
+import SeriesNavigation from "../../components/SeriesNavigation";
 import { getChildPosts, getLiteraryWork, getLiteraryWorks } from "../../../lib/posts";
 import { createPageMetadata } from "../../../lib/metadata";
 
@@ -37,6 +38,7 @@ export default async function LiteraryWorkPage({ params }) {
             <PostList posts={children} />
           </section>
         )}
+        <SeriesNavigation post={work} />
       </article>
     </main>
   );

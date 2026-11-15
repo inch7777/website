@@ -1,12 +1,54 @@
 import Link from "next/link";
 import { getPostsByTopic, topics as topicDefinitions } from "../../lib/posts";
 
-function musingNavigationItem(post) {
+function musingNavigationItem(post, label = post.title) {
   return {
-    label: post.title,
+    label,
     href: post.href,
-    children: post.children.map(musingNavigationItem),
+    children: navigationLabels(post.children),
   };
+}
+
+// Sibling titles such as "Math 161, Sheet 1: Sets" and "Sheet 9: Limits"
+// repeat a course label. In the sidebar they are shortened to "1: Sets" and
+// "9: Limits" when most siblings follow that "… number: title" pattern;
+// otherwise a shared opening ("Notes on …") is dropped. Siblings with the
+// same title, such as drafts of one sheet, are told apart by file name.
+function navigationLabels(posts) {
+  const titles = posts.map((post) => post.title);
+  const numbered = titles.map((title) => title.match(/^(.{0,30}?)(\d+(?:\.\d+)*)\s*:\s+(.+)$/));
+  const useNumbers = posts.length >= 3 && numbered.filter(Boolean).length >= posts.length * 0.6;
+  const prefix = useNumbers ? "" : sharedPrefix(titles);
+
+  return posts.map((post, index) => {
+    let label = post.title;
+    if (titles.filter((title) => title === post.title).length > 1 && post.name) {
+      label = post.name;
+    } else if (useNumbers && numbered[index]) {
+      label = `${numbered[index][2]}: ${numbered[index][3]}`;
+    } else if (prefix && post.title.startsWith(prefix) && post.title.slice(prefix.length).trim()) {
+      label = post.title.slice(prefix.length).trim();
+    }
+    return musingNavigationItem(post, label);
+  });
+}
+
+function sharedPrefix(titles) {
+  if (titles.length < 3) return "";
+  const needed = Math.max(2, Math.ceil(titles.length * 0.6));
+  let best = "";
+
+  for (const title of titles) {
+    // Candidate prefixes end after a space, at a word boundary.
+    for (let end = title.indexOf(" ") + 1; end > 0; end = title.indexOf(" ", end) + 1) {
+      const candidate = title.slice(0, end);
+      if (candidate.length <= best.length) continue;
+      const count = titles.filter((other) => other.startsWith(candidate)).length;
+      if (count >= needed) best = candidate;
+    }
+  }
+
+  return best.length >= 4 ? best : "";
 }
 
 const sections = [
@@ -19,7 +61,7 @@ const sections = [
     items: topicDefinitions.map((topic) => ({
       label: topic.label,
       href: `/musings/${topic.slug}`,
-      children: getPostsByTopic(topic.slug).map(musingNavigationItem),
+      children: navigationLabels(getPostsByTopic(topic.slug)),
     })),
   },
 ];

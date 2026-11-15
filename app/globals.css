@@ -1359,3 +1359,179 @@ h1 {
   .nav-menu-label::after,
   .post-row-arrow { transition: none; }
 }
+
+/* Mathematical structure (lib/rehype-structure.js) ------------------------ */
+
+@media (min-width: 721px) {
+  /* The sidebar stays in view while reading; long trees scroll inside it
+     instead of running off the bottom of the screen. */
+  .musings-sidebar {
+    max-height: calc(100vh - 72px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+  }
+}
+
+.article-body [id] { scroll-margin-top: 24px; }
+
+.article-body .statement-theorem,
+.article-body .statement-definition {
+  padding-left: 16px;
+  border-left: 2px solid var(--ink);
+}
+
+.article-body .statement-definition { border-left-color: #b5b5b5; }
+
+.article-body .statement-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.article-body .statement:target,
+.article-body h2:target,
+.article-body h3:target {
+  animation: target-flash 2.4s var(--ease-out);
+}
+
+@keyframes target-flash {
+  from { background: #f3ecd2; }
+  to { background: transparent; }
+}
+
+.article-body .statement-ref {
+  text-decoration-style: dotted;
+  text-decoration-color: #8d8d8d;
+}
+
+.article-body .proof {
+  margin: 0 0 1.45em;
+  padding-left: 16px;
+  border-left: 1px solid var(--line);
+}
+
+.article-body .proof > :last-child { margin-bottom: 0; }
+
+.article-body .proof-label {
+  font-style: italic;
+  font-weight: 400;
+}
+
+.article-body .qed {
+  float: right;
+  margin-left: 1em;
+  color: var(--muted);
+}
+
+.article-body .qed-line {
+  margin: -0.4em 0 0;
+  text-align: right;
+}
+
+.article-body .toc {
+  margin: 0 0 2.6em;
+  padding: 16px 20px 18px;
+  border: 1px solid var(--line);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.article-body .toc-title {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.article-body .toc ol {
+  margin: 0;
+  padding-left: 1.5em;
+}
+
+.article-body .toc li + li { margin-top: 0.2em; }
+
+.article-body .toc a { text-decoration: none; }
+
+.article-body .toc .katex { font-size: 1.05em; }
+
+.article-body .heading-anchor {
+  margin-left: 0.35em;
+  color: #a5a5a5;
+  font-weight: 400;
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.article-body h2:hover .heading-anchor,
+.article-body h3:hover .heading-anchor,
+.article-body .heading-anchor:focus-visible { opacity: 1; }
+
+@media (hover: hover) and (pointer: fine) {
+  .article-body .statement-link:hover,
+  .article-body .toc a:hover { text-decoration: underline; }
+
+  .article-body .statement-ref:hover { text-decoration-style: solid; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .article-body .statement:target,
+  .article-body h2:target,
+  .article-body h3:target { animation: none; }
+}
+
+/* Print -------------------------------------------------------------------- */
+
+@media print {
+  @page { margin: 18mm 16mm; }
+
+  body { background: #fff; }
+
+  .site-header,
+  .footer,
+  .musings-sidebar,
+  .article-back,
+  .article-navigation,
+  .blog-archive,
+  .article-body .toc,
+  .article-body .heading-anchor { display: none; }
+
+  .shell { width: auto; }
+
+  .musings,
+  .article-page {
+    display: block;
+    padding: 0;
+  }
+
+  .musing-article-header,
+  .article-header { padding-bottom: 16px; }
+
+  .musing-article-header h1 { font-size: 26pt; }
+
+  .article-body,
+  .musing-article-body {
+    padding-top: 18px;
+    color: #000;
+    font-size: 11pt;
+    line-height: 1.55;
+  }
+
+  .article-body > * { max-width: none; }
+
+  .article-body mark { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+
+  .article-body a { text-decoration: none; }
+
+  .article-body h2,
+  .article-body h3 { break-after: avoid; }
+
+  .article-body .katex-display,
+  .article-body .statement,
+  .article-body pre,
+  .article-body tr { break-inside: avoid; }
+
+  .article-body .katex-display { overflow: visible; }
+}

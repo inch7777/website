@@ -4,6 +4,7 @@ import JsonLd from "../../../components/JsonLd";
 import MarkdownContent from "../../../components/MarkdownContent";
 import MusingsLayout from "../../../components/MusingsLayout";
 import PostList from "../../../components/PostList";
+import SeriesNavigation from "../../../components/SeriesNavigation";
 import {
   formatPostDate,
   getChildPosts,
@@ -85,6 +86,7 @@ export default async function MusingPage({ params }) {
           <PostList posts={children} />
         </section>
       )}
+      <SeriesNavigation post={post} />
     </MusingsLayout>
   );
 }
