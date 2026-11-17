@@ -1,9 +1,5 @@
 
-# MATH 161, SHEET 2.5: PERMUTATIONS
-
-This sheet introduces permutations—bijections from a set to itself—and their properties. Permutations form the symmetric group $S_n$, which is the prototypical example of a non-abelian group and the foundation for Galois theory.
-
-**Commentary.** Permutations are one of the oldest and most important objects in algebra. They arise naturally in counting problems, geometry, and the study of polynomial equations. The fact that every group can be realized as a group of permutations (Cayley's Theorem, Sheet 5) makes permutations fundamental to all of group theory.
+# Solutions written on Nov14 of SHEET 2.5: PERMUTATIONS
 
 ---
 
