@@ -1,5 +1,5 @@
 
-# MATH 161, SHEET 2: SUBGROUPS AND CYCLIC GROUPS
+# 2: SUBGROUPS AND CYCLIC GROUPS
 
 This sheet introduces subgroups—the fundamental substructures of groups—and cyclic groups, the simplest class of groups.
 
