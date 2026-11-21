@@ -1,4 +1,4 @@
-# MATH 161, SHEET 3: COSETS, LAGRANGE'S THEOREM, AND NORMAL SUBGROUPS
+# 3: COSETS, LAGRANGE'S THEOREM, AND NORMAL SUBGROUPS
 
 This sheet introduces cosets, derives Lagrange's Theorem—one of the most important counting theorems in group theory—and defines normal subgroups.
 
