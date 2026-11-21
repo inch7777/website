@@ -1,7 +1,7 @@
 import Link from "next/link";
 import JsonLd from "./JsonLd";
 import MarkdownContent from "./MarkdownContent";
-import { formatPostDate } from "../../lib/posts";
+import PostDates from "./PostDates";
 import { site } from "../../lib/site";
 
 export default function MarkdownArticle({ item, backHref, backLabel }) {
@@ -23,12 +23,9 @@ export default function MarkdownArticle({ item, backHref, backLabel }) {
         <Link className="article-back" href={backHref}>
           <span aria-hidden="true">←</span> {backLabel}
         </Link>
-        <p className="article-meta">
-          <time dateTime={item.publishedAt}>{formatPostDate(item.publishedAt)}</time>
-        </p>
+        <PostDates post={item} />
         <h1>{item.title}</h1>
         {item.description ? <p className="article-deck">{item.description}</p> : null}
-        {item.updatedAt && <p className="article-updated">Updated {formatPostDate(item.updatedAt)}</p>}
       </header>
       {item.content.trim() ? (
         <div className="article-body">

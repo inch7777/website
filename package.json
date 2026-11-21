@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/fetch-git-history.mjs",
     "build": "next build",
     "start": "next start",
     "check": "node --no-warnings scripts/check-content.mjs"

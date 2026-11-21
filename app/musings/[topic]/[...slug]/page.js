@@ -3,10 +3,10 @@ import { notFound } from "next/navigation";
 import JsonLd from "../../../components/JsonLd";
 import MarkdownContent from "../../../components/MarkdownContent";
 import MusingsLayout from "../../../components/MusingsLayout";
+import PostDates from "../../../components/PostDates";
 import PostList from "../../../components/PostList";
 import SeriesNavigation from "../../../components/SeriesNavigation";
 import {
-  formatPostDate,
   getChildPosts,
   getPost,
   getMusings,
@@ -69,9 +69,7 @@ export default async function MusingPage({ params }) {
           <span aria-hidden="true">←</span>{" "}
           {post.parentTitle || getTopicLabel(post.topic)}
         </Link>
-        <p className="article-meta">
-          <time dateTime={post.publishedAt}>{formatPostDate(post.publishedAt)}</time>
-        </p>
+        <PostDates post={post} />
         <h1>{post.title}</h1>
         {post.description ? <p className="article-deck">{post.description}</p> : null}
       </header>
