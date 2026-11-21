@@ -91,6 +91,10 @@ The set $A \setminus B$ is also called the complement of $B$ relative to $A$. Wh
 1. $X \setminus (A \cup B) = (X \setminus A) \cap (X \setminus B)$
 2. $X \setminus (A \cap B) = (X \setminus A) \cup (X \setminus B)$
 
+$Proof:$
+$X \setminus (A \cup B) =\{ x|\in X,x\not\in A,x\not\in B \} =\{ x|x \in X,x\not\in A \}\cap \{ x|x \in X,x\not\in B \}=(X \setminus A) \cap (X \setminus B)$
+$X \setminus (A \cap B) = (X \setminus A) \cup (X \setminus B)$ is similar.
+
 **Definition 1.14.** Let $A$ and $B$ be two nonempty sets. The **Cartesian product** of $A$ and $B$ is the set of ordered pairs
 
 $$
@@ -140,6 +144,13 @@ $$
 ~={pink}(Supplementary Corollary: $|[n]|=n$ because, of course, there is a bijective correspondence between such a set and itself, for example, $f(x)=x$)=~
 
 **Theorem 1.29.** Let $A$, $B$, and $C$ be sets and suppose that there is a bijective correspondence between $A$ and $B$ and a bijective correspondence between $B$ and $C$. Then there is a bijective correspondence between $A$ and $C$.
+
+$Proof.$
+Since there exists a bijective correspondence between $A$ and $B$, by definition 1.28, $|A|=|B|.$
+Similarly $|B|=|C|$.
+Therefore, $|A|=|C|$.
+By definitn 1.28 again, since $A$ and $B$ have a same cadinality, there exists a bijective correspondence between them.
+
 
 The following two results show that the cardinality of a finite set is well-defined.
 
