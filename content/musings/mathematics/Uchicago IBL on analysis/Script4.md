@@ -84,8 +84,6 @@ A good summary of the definition of compactness is "every open cover contains a 
 
 ~={orange}**Lemma 4.20.** No finite collection of regions covers $C$.=~
 
-~={red} By Corollary 4.16, $C$ is not bounded=~
-
 **Theorem 4.21.** $C$ is not compact.
 
 **Theorem 4.22.** If $X$ is compact, then $X$ is bounded.
